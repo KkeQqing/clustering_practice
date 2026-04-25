@@ -28,15 +28,15 @@ while count > 0:
     sortM = [[0,0,0],[0,0,0],[0,0,0]]
     flag = 0 #标记类别
     for i in range(len(x)):
-        min = 1000
+        distances = []
         for j in range(3):
             distance = math.sqrt((x[i]-sortX[j])**2+(y[i]-sortY[j])**2)
-            if distance < min:
-                min = distance
-                flag = j
-                sortM[j][0] += x[i]
-                sortM[j][1] += y[i]
-                sortM[j][2] += 1
+            distances.append(distance)
+        min_distant = min(distances)
+        flag = distances.index(min_distant)
+        sortM[flag][0] += x[i]
+        sortM[flag][1] += y[i]
+        sortM[flag][2] += 1
         sortF[i] = flag
     for i in range(3): #更新质心
         sortX[i] = sortM[i][0]//sortM[i][2]
