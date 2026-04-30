@@ -120,3 +120,29 @@ plt.grid(True, alpha=0.3)
 plt.tight_layout()
 
 plt.show()
+
+
+# ==================== 肘部法则：自动找最佳 K ====================
+def elbow_method(points, max_k=10):
+    sse = []
+    K_range = range(2, max_k + 1)
+
+    for k in K_range:
+        labels, centers = kmeans(points, k=k)
+        sse_k = 0
+        for i in range(k):
+            cluster_p = points[labels == i]
+            sse_k += np.sum((cluster_p - centers[i]) ** 2)
+        sse.append(sse_k)
+
+    # 画图
+    plt.figure(figsize=(8, 4))
+    plt.plot(K_range, sse, 'o-', color='blue', linewidth=2)
+    plt.xlabel('K 聚类数量')
+    plt.ylabel('SSE 簇内误差平方和')
+    plt.title('肘部法则 —— 寻找最佳 K 值')
+    plt.grid(alpha=0.3)
+    plt.show()
+
+# 运行肘部法则
+elbow_method(points, max_k=10)
