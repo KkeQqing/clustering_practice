@@ -94,3 +94,14 @@ desktop.ini
 # *.npz
 # *.h5
 # *.parquet
+
+# auto-added ignore rules
+.vscode/
+.vs/
+*.suo
+*.user
+*.log
+*.tmp
+.pytest_cache/
+.mypy_cache/
+.venv/
